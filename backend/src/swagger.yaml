@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: D&D character sheet
+  description: Fringilla sociis posuere tellus dui
+
+servers:
+  - url: http://localhost:3000/
+  - url: https://localhost:3000/
+paths:
+  /:
+    get:
+      tags:
+        - API
+      summary: keep alive route
+      description: used to check if api is available
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
