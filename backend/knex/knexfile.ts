@@ -8,6 +8,9 @@ module.exports = {
     migrations: {
       extension: 'ts',
     },
+    seeds: {
+      extension: 'ts',
+    },
     connection: {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
@@ -29,6 +32,9 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
+      extension: 'ts',
+    },
+    seeds: {
       extension: 'ts',
     },
   },

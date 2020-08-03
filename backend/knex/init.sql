@@ -27,16 +27,14 @@ CREATE TABLE language_list (
   language_id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
   language_name VARCHAR(64),
   language_type VARCHAR(24),
+  language_description TEXT,
   script VARCHAR(24)
 );
 
 CREATE TABLE languages (
   id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
   character_id INT NOT NULL,
-  language_id INT,
-  language_name VARCHAR(64),
-  language_type VARCHAR(24),
-  script VARCHAR(24),
+  language_id INT NOT NULL,
   FOREIGN KEY (character_id) REFERENCES characters (character_id),
   FOREIGN KEY (language_id) REFERENCES language_list (language_id)
 );
@@ -72,9 +70,15 @@ CREATE TABLE proficiency_list (
 );
 
 CREATE TABLE proficiencies (
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
   character_id INT NOT NULL,
   proficiency_id INT NOT NULL,
   FOREIGN KEY (character_id) REFERENCES characters(character_id),
   FOREIGN KEY (proficiency_id) REFERENCES proficiency_list(proficiency_id)
 );
+
+-- CREATE TABLE stats (
+--   id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
+--   character_id INT NOT NULL,
+
+-- );
