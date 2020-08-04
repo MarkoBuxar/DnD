@@ -2,8 +2,5 @@
   "watch": ["src"],
   "ext": "ts yaml",
   "ignore": ["src/**/*.spec.ts", "src/types.ts"],
-  "events": {
-    "restart": "npx @manifoldco/swagger-to-ts ./src/swagger.yaml -o ./src/types.ts"
-  },
-  "exec": "ts-node ./src/index.ts"
+  "exec": "npx swagger-typescript-api -p ./src/swagger.yaml -o ./src/ -n types.ts --no-client  && ts-node -C ttypescript ./src/index.ts"
 }

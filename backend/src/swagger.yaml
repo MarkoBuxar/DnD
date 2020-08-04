@@ -42,11 +42,50 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Character'
+                  $ref: '#/components/schemas/CharacterInfo'
+  /character/{character_id}:
+    get:
+      tags:
+        - Characters
+      summary: Get detailed character info
+      description: Returns all info about a character
+      operationId: getCharacter
+      parameters:
+        - name: character_id
+          in: path
+          required: true
+          description: Character ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Character'
 
 components:
   schemas:
     Character:
+      type: object
+      required:
+        - info
+        - stats
+        - languages
+        - gold
+      properties:
+        info:
+          $ref: '#/components/schemas/CharacterInfo'
+        stats:
+          $ref: '#/components/schemas/CharacterStats'
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+        gold:
+          $ref: '#/components/schemas/GoldPouch'
+    CharacterInfo:
       type: object
       required:
         - user_id
@@ -98,3 +137,95 @@ components:
           type: string
         physical_desc:
           type: string
+    CharacterStats:
+      type: object
+      required:
+        - walking_speed
+        - strength
+        - dexterity
+        - constitution
+        - intelligence
+        - wisdom
+        - charisma
+        - max_hp
+        - temp_hp
+        - curr_hp
+      properties:
+        walking_speed:
+          type: integer
+        climbing_speed:
+          type: integer
+        swimming_speed:
+          type: integer
+        strength:
+          type: integer
+          maximum: 30
+          minimum: 1
+        dexterity:
+          type: integer
+          maximum: 30
+          minimum: 1
+        constitution:
+          type: integer
+          maximum: 30
+          minimum: 1
+        intelligence:
+          type: integer
+          maximum: 30
+          minimum: 1
+        wisdom:
+          type: integer
+          maximum: 30
+          minimum: 1
+        charisma:
+          type: integer
+          maximum: 30
+          minimum: 1
+        max_hp:
+          type: integer
+        temp_hp:
+          type: integer
+        curr_hp:
+          type: integer
+        exhaustion:
+          type: integer
+        armour:
+          $ref: '#/components/schemas/Armour'
+        concentration:
+          $ref: '#/components/schemas/Spell'
+    Language:
+      type: object
+      required:
+        - language_name
+        - language_type
+      properties:
+        language_name:
+          type: string
+        language_type:
+          type: string
+        language_description:
+          type: string
+    GoldPouch:
+      type: object
+      required:
+        - CP
+        - SP
+        - EP
+        - GP
+        - PP
+      properties:
+        CP:
+          type: integer
+        SP:
+          type: integer
+        EP:
+          type: integer
+        GP:
+          type: integer
+        PP:
+          type: integer
+
+    Armour:
+      type: object
+    Spell:
+      type: object
