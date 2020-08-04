@@ -48,7 +48,25 @@ components:
   schemas:
     Character:
       type: object
+      required:
+        - user_id
+        - character_id
+        - creation_date
+        - character_name
+        - lvl
+        - xp
+        - age
+        - gender
+        - race
+        - class
+        - size
+        - weight
+        - eye_colour
+        - handedness
+        - physical_desc
       properties:
+        user_id:
+          type: integer
         character_id:
           type: integer
         creation_date:

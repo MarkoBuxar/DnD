@@ -3,6 +3,7 @@ CREATE DATABASE dndcharsheet;
 USE dndcharsheet;
 
 CREATE TABLE characters(
+  user_id INT NOT NULL,
   character_id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
   creation_date DATETIME DEFAULT NOW(),
   character_name VARCHAR(64) NOT NULL UNIQUE,
