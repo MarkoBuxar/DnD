@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS dndcharsheet;
 CREATE DATABASE dndcharsheet;
 USE dndcharsheet;
 
@@ -9,18 +10,15 @@ CREATE TABLE characters(
   xp INT UNSIGNED DEFAULT 0,
   age INT UNSIGNED,
   gender VARCHAR(64),
+  race VARCHAR(64),
   class VARCHAR(64) NOT NULL,
   size VARCHAR(24),
   height VARCHAR(24),
-  weight VARCHAR(24),
+  weight INT(8),
   skin VARCHAR(24),
   eye_colour VARCHAR(24), 
   handedness VARCHAR(24),
-  physical_desc TEXT,
-  d6 INT(2) UNSIGNED,
-  d8 INT(2) UNSIGNED,
-  d10 INT(2) UNSIGNED,
-  d12 INT(2) UNSIGNED
+  physical_desc TEXT
 );
 
 CREATE TABLE language_list (
@@ -77,8 +75,27 @@ CREATE TABLE proficiencies (
   FOREIGN KEY (proficiency_id) REFERENCES proficiency_list(proficiency_id)
 );
 
--- CREATE TABLE stats (
---   id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
---   character_id INT NOT NULL,
-
--- );
+CREATE TABLE stats (
+  id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
+  character_id INT NOT NULL, -- FK
+  walking_speed INT(3),
+  climbing_speed INT(3),
+  swimming_speed INT(3),
+  strength INT(2) UNSIGNED NOT NULL DEFAULT 8,
+  dexterity INT(2) UNSIGNED NOT NULL DEFAULT 8,
+  constitution INT(2) UNSIGNED NOT NULL DEFAULT 8,
+  intelligence INT(2) UNSIGNED NOT NULL DEFAULT 8,
+  wisdom INT(2) UNSIGNED NOT NULL DEFAULT 8,
+  charisma INT(2) UNSIGNED NOT NULL DEFAULT 8,
+  armour_id INT, -- FK
+  max_hp INT(3) NOT NULL DEFAULT 0, 
+  temp_hp INT(3) NOT NULL DEFAULT 0, 
+  curr_hp INT(3) NOT NULL DEFAULT 0, 
+  exhaustion_id INT, -- FK
+  concentration_id INT, -- FK
+  d6 INT(2) UNSIGNED,
+  d8 INT(2) UNSIGNED,
+  d10 INT(2) UNSIGNED,
+  d12 INT(2) UNSIGNED,
+  FOREIGN KEY (character_id) REFERENCES characters(character_id)
+);

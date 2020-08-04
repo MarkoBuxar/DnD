@@ -20,3 +20,63 @@ paths:
             application/json:
               schema:
                 type: object
+  /characters/{user_id}:
+    get:
+      tags:
+        - Characters
+      summary: return list of characters
+      description: Returns all characters belonging to a user
+      operationId: getCharacters
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: User ID recieved on authentication
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Character'
+
+components:
+  schemas:
+    Character:
+      type: object
+      properties:
+        character_id:
+          type: integer
+        creation_date:
+          type: string
+          format: date-time
+        character_name:
+          type: string
+        lvl:
+          type: integer
+        xp:
+          type: integer
+        age:
+          type: integer
+        gender:
+          type: string
+        race:
+          type: string
+        class:
+          type: string
+        size:
+          type: string
+        height:
+          type: string
+        weight:
+          type: integer
+        eye_colour:
+          type: string
+        handedness:
+          type: string
+        physical_desc:
+          type: string
