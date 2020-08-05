@@ -7,11 +7,11 @@ export async function seed(knex: Knex): Promise<void> {
 
   // Inserts seed entries
   await knex('proficiency_types').insert([
-    { proficiency_type_name: 'STAT' },
-    { proficiency_type_name: 'SKILL' },
-    { proficiency_type_name: 'WEAPON' },
-    { proficiency_type_name: 'ARMOUR' },
-    { proficiency_type_name: 'INSTRUMENT' },
-    { proficiency_type_name: 'ITEM' },
+    { proficiency_type: 'Save' },
+    { proficiency_type: 'Skill' },
+    { proficiency_type: 'Weapons' },
+    { proficiency_type: 'Armor' },
+    { proficiency_type: 'Instruments' },
+    { proficiency_type: `Tools` },
   ]);
 }

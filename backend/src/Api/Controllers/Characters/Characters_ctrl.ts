@@ -3,15 +3,19 @@ import { CharacterInfo, Character } from '../../../types';
 
 export class CharacterCtrl {
   public static async getCharacters(req, res, next): Promise<void> {
-    const characterService = new CharactersService();
-    const data: CharacterInfo[] = await characterService.getCharacters(
-      req.params.user_id,
-    );
+    try {
+      const characterService = new CharactersService();
+      const data: CharacterInfo[] = await characterService.getCharacters(
+        req.params.user_id,
+      );
 
-    res.send(data);
+      res.send(data);
+    } catch (exp) {
+      next(exp);
+    }
   }
 
-  public static async getCharacter(req, res, next) {
+  public static async getCharacter(req, res, next): Promise<void> {
     try {
       const characterService = new CharactersService();
       const data: Character = await characterService.getCharacter(

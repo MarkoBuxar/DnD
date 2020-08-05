@@ -57,14 +57,15 @@ CREATE TABLE gold_pouches (
 
 CREATE TABLE proficiency_types (
   proficiency_type_id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
-  proficiency_type_name VARCHAR(24) NOT NULL
+  proficiency_type VARCHAR(24) NOT NULL
 );
 
 CREATE TABLE proficiency_list (
   proficiency_id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
+  unique_id VARCHAR(64) UNIQUE,
   proficiency_name VARCHAR(64) NOT NULL UNIQUE,
   proficiency_type_id INT NOT NULL,
-  skill VARCHAR(8),
+  skill VARCHAR(16),
   FOREIGN KEY (proficiency_type_id) REFERENCES proficiency_types(proficiency_type_id)
 );
 

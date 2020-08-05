@@ -74,6 +74,7 @@ components:
         - stats
         - languages
         - gold
+        - proficiencies
       properties:
         info:
           $ref: '#/components/schemas/CharacterInfo'
@@ -83,6 +84,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Language'
+        proficiencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proficiency'
         gold:
           $ref: '#/components/schemas/GoldPouch'
     CharacterInfo:
@@ -224,6 +229,34 @@ components:
           type: integer
         PP:
           type: integer
+    Proficiency:
+      type: object
+      required:
+        - proficiency_type
+        - proficiency_name
+      properties:
+        proficiency_name:
+          type: string
+        proficiency_type:
+          type: string
+          enum:
+            - Save
+            - Skill
+            - Weapons
+            - Armor
+            - Instruments
+            - Tools
+        skill:
+          type: string
+          nullable: true
+          enum:
+            - dexterity
+            - strength
+            - constitution
+            - intelligence
+            - wisdom
+            - charisma
+            - null
 
     Armour:
       type: object

@@ -4,6 +4,8 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('gold_pouches').del();
   await knex('languages').del();
   await knex('stats').del();
+  await knex('proficiencies').del();
+  await knex('proficiency_list').del();
   await knex('characters').del();
   await knex.raw('ALTER TABLE characters AUTO_INCREMENT = 1');
 

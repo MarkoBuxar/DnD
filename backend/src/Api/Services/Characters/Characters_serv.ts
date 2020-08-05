@@ -5,6 +5,7 @@ import {
   CharacterStats,
   Language,
   GoldPouch,
+  Proficiency,
 } from '../../../types';
 import { keys } from 'ts-transformer-keys';
 
@@ -42,6 +43,22 @@ export class CharactersService {
         .select(keys<GoldPouch>())
     )[0];
 
-    return { info, stats, languages, gold };
+    const proficiencies: Proficiency[] = await Knex.i()('proficiencies')
+      .where({ character_id: characterId })
+      .leftJoin(
+        'proficiency_list',
+        'proficiencies.proficiency_id',
+        'proficiency_list.proficiency_id',
+      )
+      .leftJoin(
+        'proficiency_types',
+        'proficiency_list.proficiency_type_id',
+        'proficiency_types.proficiency_type_id',
+      )
+      .select(keys<Proficiency>());
+
+    const data: Character = { info, stats, languages, proficiencies, gold };
+
+    return data;
   }
 }

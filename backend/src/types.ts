@@ -14,6 +14,7 @@ export interface Character {
   info: CharacterInfo;
   stats: CharacterStats;
   languages: Language[];
+  proficiencies: Proficiency[];
   gold: GoldPouch;
 }
 
@@ -66,6 +67,12 @@ export interface GoldPouch {
   EP: number;
   GP: number;
   PP: number;
+}
+
+export interface Proficiency {
+  proficiency_name: string;
+  proficiency_type: "Save" | "Skill" | "Weapons" | "Armor" | "Instruments" | "Tools";
+  skill?: "dexterity" | "strength" | "constitution" | "intelligence" | "wisdom" | "charisma" | "null";
 }
 
 export type Armour = object;
