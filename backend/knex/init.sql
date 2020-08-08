@@ -89,7 +89,7 @@ CREATE TABLE stats (
   intelligence INT(2) UNSIGNED NOT NULL DEFAULT 8,
   wisdom INT(2) UNSIGNED NOT NULL DEFAULT 8,
   charisma INT(2) UNSIGNED NOT NULL DEFAULT 8,
-  armour_id INT, -- FK
+  armor_id INT, -- FK
   max_hp INT(3) NOT NULL DEFAULT 0, 
   temp_hp INT(3) NOT NULL DEFAULT 0, 
   curr_hp INT(3) NOT NULL DEFAULT 0, 
@@ -100,4 +100,23 @@ CREATE TABLE stats (
   d10 INT(2) UNSIGNED,
   d12 INT(2) UNSIGNED,
   FOREIGN KEY (character_id) REFERENCES characters(character_id)
+);
+
+CREATE TABLE item_types(
+  item_type_id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
+  item_type VARCHAR(24) NOT NULL
+);
+
+
+CREATE TABLE items(
+  id INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT, 
+  character_id INT NOT NULL, -- FK
+  quantity INT NOT NULL DEFAULT 1,
+  item_type_id INT NOT NULL, -- FK
+  weapon_id INT, -- FK
+  armor_id INT, -- FK
+  item_id INT, -- FK
+  weight INT NOT NULL DEFAULT 0,
+  FOREIGN KEY (character_id) REFERENCES characters(character_id),
+  FOREIGN KEY (item_type_id) REFERENCES item_types(item_type_id)
 );

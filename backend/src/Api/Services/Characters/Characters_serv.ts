@@ -6,6 +6,8 @@ import {
   Language,
   GoldPouch,
   Proficiency,
+  InventoryItem,
+  ItemSkeleton,
 } from '../../../types';
 import { keys } from 'ts-transformer-keys';
 
@@ -24,6 +26,7 @@ export class CharactersService {
         .select(keys<CharacterInfo>())
     )[0];
 
+    // *
     const stats: CharacterStats = (
       await Knex.i()('stats').where({ character_id: characterId }).select('*')
     )[0];
@@ -57,7 +60,19 @@ export class CharactersService {
       )
       .select(keys<Proficiency>());
 
-    const data: Character = { info, stats, languages, proficiencies, gold };
+    const inventory: InventoryItem[] = await Knex.i()('items')
+      .where({ character_id: characterId })
+      .leftJoin('item_types', 'items.item_type_id', 'item_types.item_type_id')
+      .select([...keys<ItemSkeleton>(), 'weapon_id', 'armor_id', 'item_id']);
+
+    const data: Character = {
+      info,
+      stats,
+      languages,
+      proficiencies,
+      gold,
+      inventory,
+    };
 
     return data;
   }

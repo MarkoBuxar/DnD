@@ -16,6 +16,7 @@ export interface Character {
   languages: Language[];
   proficiencies: Proficiency[];
   gold: GoldPouch;
+  inventory: InventoryItem[];
 }
 
 export interface CharacterInfo {
@@ -51,7 +52,7 @@ export interface CharacterStats {
   temp_hp: number;
   curr_hp: number;
   exhaustion?: number;
-  armour?: Armour;
+  armor?: Armor;
   concentration?: Spell;
 }
 
@@ -75,6 +76,18 @@ export interface Proficiency {
   skill?: "dexterity" | "strength" | "constitution" | "intelligence" | "wisdom" | "charisma" | "null";
 }
 
-export type Armour = object;
+export type InventoryItem = Armor | Weapon | Item | (Armor & Weapon & Item);
+
+export type Armor = ItemSkeleton;
+
+export type Weapon = ItemSkeleton;
+
+export type Item = ItemSkeleton;
+
+export interface ItemSkeleton {
+  item_type: string;
+  quantity: number;
+  weight: number;
+}
 
 export type Spell = object;

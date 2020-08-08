@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import { connector } from 'swagger-routes-express';
 import { OpenApiValidator } from 'express-openapi-validator';
+import cors from 'cors';
 import routes from './Api/routes';
 
 (async () => {
@@ -19,7 +20,7 @@ import routes from './Api/routes';
   const connect = connector(routes, apiDefinition);
 
   app.use(helmet());
-  // app.use(cors());
+  app.use(cors());
 
   app.use('/docs', swagger.serve, swagger.setup(apiDefinition));
 

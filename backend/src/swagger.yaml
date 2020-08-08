@@ -75,6 +75,7 @@ components:
         - languages
         - gold
         - proficiencies
+        - inventory
       properties:
         info:
           $ref: '#/components/schemas/CharacterInfo'
@@ -90,6 +91,11 @@ components:
             $ref: '#/components/schemas/Proficiency'
         gold:
           $ref: '#/components/schemas/GoldPouch'
+        inventory:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+
     CharacterInfo:
       type: object
       required:
@@ -194,8 +200,8 @@ components:
           type: integer
         exhaustion:
           type: integer
-        armour:
-          $ref: '#/components/schemas/Armour'
+        armor:
+          $ref: '#/components/schemas/Armor'
         concentration:
           $ref: '#/components/schemas/Spell'
     Language:
@@ -258,7 +264,31 @@ components:
             - charisma
             - null
 
-    Armour:
-      type: object
+    InventoryItem:
+      anyOf:
+        - $ref: '#/components/schemas/Armor'
+        - $ref: '#/components/schemas/Weapon'
+        - $ref: '#/components/schemas/Item'
+    Armor:
+      allOf:
+        - $ref: '#/components/schemas/ItemSkeleton'
+    Weapon:
+      allOf:
+        - $ref: '#/components/schemas/ItemSkeleton'
+    Item:
+      allOf:
+        - $ref: '#/components/schemas/ItemSkeleton'
+    ItemSkeleton:
+      required:
+        - item_type
+        - weight
+        - quantity
+      properties:
+        item_type:
+          type: string
+        quantity:
+          type: number
+        weight:
+          type: number
     Spell:
       type: object
